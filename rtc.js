@@ -22,12 +22,9 @@ var wiFetcher = new WorkItems(REPO, USER, PASS);
 var Session = require('slackr-bot');
 
 var sess = new Session({
-//    token: 'xoxp-3930341205-3930341229-3932599084-fc55c8',
     token: TOKEN,
     webhookClient: {
-//        token: 'T03TCA161/B03UE32L6/xGfWb9HsEFTdVaPG5oByKCIa',
         token: WEBHOOK,
-//        team: 'ljkadljkasdljaksfajlf'
         team: TEAM
     }
 });
