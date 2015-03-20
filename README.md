@@ -34,3 +34,7 @@ Optional
 ```
     https://jazz.net/jazz/web/projects/Rational%20Team%20Concert#action=com.ibm.team.workitem.viewWorkItem&id={0}
 ```
+
+# See also
+
+[RTC-Slackbot](https://github.com/jroyal/RTC-Slackbot) - A python-based slackbot that provides user, work item, and backlog lookup.
