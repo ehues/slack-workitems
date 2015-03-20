@@ -1,5 +1,11 @@
 # slack-workitems
 
+A slack bot that displays a work item summary when it's mentioned in a channel. 
+
+![Sample mention](images/sample-mention.png)
+
+# Configuration
+
 Set the following environment variables
 
 `RTC_REPO` - URI of the RTC repository. 
