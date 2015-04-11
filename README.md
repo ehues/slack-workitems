@@ -19,12 +19,10 @@ Set the following environment variables
     xoxb-4012132863-hv5aqYGYCPa153c08vRUhz77
 ```
 
-`RTC_WEBHOOK` - Webhook to publish attachments into Slack. Go to https://<your-team>.slack.com/services/new/incoming-webhook, and add get the last three segments of the path specified in the hook.
+`RTC_WEBHOOK` - Webhook to publish attachments into Slack. Go to https://<your-team>.slack.com/services/new/incoming-webhook, and get the value specified as the "Webhook URL":
 ```
-    T03SYNZBC/A040C4EKP/AFJkBIW8DRDbOsgVStITd9no
+    https://hooks.slack.com/services/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
 ```
-
-`RTC_TEAM` - Name of the team you are connecting to (e.g. https://<your-team>.slack.com)
 
 
 Optional

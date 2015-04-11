@@ -4,15 +4,24 @@ var WorkItems = require('./wi.js');
 var relDate = require('relative-date');
 var format = require('string-template');
 
+function load_env(name, desc) {
+    var value = process.env[name];
+
+    if ("" == value || undefined === value) {
+        console.log("Environment variable " + name + " must be set. " + desc);
+        process.exit(1);
+    }
+
+    return value;
+}
 
 // Consume our configuration 
-var REPO = process.env.RTC_REPO;
-var USER = process.env.RTC_USER;
-var PASS = process.env.RTC_PASS;
+var REPO = load_env("RTC_REPO", "It is the URI of the RTC server.");
+var USER = load_env("RTC_USER", "It is the username of the RTC user that the bot will login as.");
+var PASS = load_env("RTC_PASS", "It is the password of the RTC user that the bot logs in as. ");
 
-var TOKEN = process.env.RTC_BOT_TOKEN;
-var WEBHOOK = process.env.RTC_WEBHOOK;
-var TEAM = process.env.RTC_TEAM;
+var TOKEN = load_env("RTC_BOT_TOKEN", "It is the Slack bot token to use.");
+var WEBHOOK = load_env("RTC_WEBHOOK", "It is the Slack webhook to use for rich attachments.");
 
 var RTC_URI_OVERRIDE = process.env.RTC_URI_OVERRIDE;
 
@@ -24,8 +33,7 @@ var Session = require('slackr-bot');
 var sess = new Session({
     token: TOKEN,
     webhookClient: {
-        token: WEBHOOK,
-        team: TEAM
+        webhookUrl: WEBHOOK
     }
 });
 
