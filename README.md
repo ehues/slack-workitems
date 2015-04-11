@@ -14,12 +14,12 @@ Set the following environment variables
 
 `RTC_PASS` - Password of the RTC user to log-in as.
 
-`RTC_BOT_TOKEN` - Bot token for Slack. Go to https://<your-team>.slack.com/services/new/bot, and add a bot. 
+`RTC_BOT_TOKEN` - Bot token for Slack. Go to https://&lt;your-team&gt;.slack.com/services/new/bot, and add a bot. 
 ```
     xoxb-4012132863-hv5aqYGYCPa153c08vRUhz77
 ```
 
-`RTC_WEBHOOK` - Webhook to publish attachments into Slack. Go to https://<your-team>.slack.com/services/new/incoming-webhook, and get the value specified as the "Webhook URL":
+`RTC_WEBHOOK` - Webhook to publish attachments into Slack. Go to https://&lt;your-team&gt;.slack.com/services/new/incoming-webhook, and get the value specified as the "Webhook URL":
 ```
     https://hooks.slack.com/services/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
 ```
