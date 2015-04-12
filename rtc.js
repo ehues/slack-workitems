@@ -145,3 +145,6 @@ function handleWorkItemMatch(message, match) {
 
 sess.on(/bug\s*(\d+)/i, handleWorkItemMatch);
 sess.on(/http\S*action=com.ibm.team.workitem.viewWorkItem\S*id=(\d+)/i, handleWorkItemMatch);
+
+require("./interactions/bark")(sess);
+require("./interactions/karma")(sess);
