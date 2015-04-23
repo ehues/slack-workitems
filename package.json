@@ -1,6 +1,6 @@
 {
   "name": "slack-workitems",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Show RTC work items in Slack",
   "main": "rtc.js",
   "dependencies": {
