@@ -138,11 +138,6 @@ function handleWorkItemMatch(message, match) {
                     mrkdwn_in: ["pretext", "text"]
             }]
         });
-
-        sess.sendMessage({
-            channel: '#bot',
-            text: "I'm an echo"
-        });
     }, function(err) {
         console.log("Error");
         console.log(err);
