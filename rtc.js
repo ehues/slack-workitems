@@ -3,6 +3,7 @@ var html2text = require('html-to-text');
 var WorkItems = require('./wi.js');
 var relDate = require('relative-date');
 var format = require('string-template');
+var pkg = require('./package');
 
 function load_env(name, desc) {
     var value = process.env[name];
@@ -26,6 +27,11 @@ var WEBHOOK = load_env("RTC_WEBHOOK", "It is the Slack webhook to use for rich a
 var RTC_URI_OVERRIDE = process.env.RTC_URI_OVERRIDE;
 
 var wiFetcher = new WorkItems(REPO, USER, PASS);
+
+var ERR_CHANNEL = process.env.RTC_ERROR_CHANNEL;
+if (ERR_CHANNEL[0] != '#') {
+    ERR_CHANNEL = '#' + ERR_CHANNEL;
+}
 
 
 var Session = require('slackr-bot');
@@ -132,13 +138,38 @@ function handleWorkItemMatch(message, match) {
                     mrkdwn_in: ["pretext", "text"]
             }]
         });
+
+        sess.sendMessage({
+            channel: '#bot',
+            text: "I'm an echo"
+        });
     }, function(err) {
         console.log("Error");
         console.log(err);
 
-        message.reply({
-            text: err
-        });
+        if (ERR_CHANNEL) {
+            var errMsg = "Failed fetching work item " + match[1];
+            var chan = sess.channelData(message.data.channel);
+            if (chan) {
+                errMsg += " (referenced in #" + chan.name + ")";
+            }
+            sess.sendMessage({
+                channel: ERR_CHANNEL,
+                text: '',
+                attachments: [{
+                        color: 'danger',
+                        fallback: errMsg,
+                        title: errMsg,
+                        text: JSON.stringify(err, null, 2),
+                        mrkdwn_in: ["pretext", "text", "title"]
+                }]
+            });
+        }
+        else {
+            message.reply({
+                text: err.toString()
+            });
+        }
     });
 
 }
@@ -149,3 +180,18 @@ sess.on(/http\S*action=com.ibm.team.workitem.viewWorkItem\S*id=(\d+)/i, handleWo
 
 require("./interactions/bark")(sess);
 require("./interactions/karma")(sess);
+
+
+sess.connected
+.then(function (success) {
+    if (ERR_CHANNEL) {
+        sess.sendMessage({
+                    channel: ERR_CHANNEL,
+                    text: pkg.name + " (" + pkg.version + ") started." 
+        });
+    }
+})
+.fail(function (err) {
+    console.log(err);
+});
+

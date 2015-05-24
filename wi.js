@@ -18,6 +18,12 @@ WorkItems.prototype.fetchOSLC = function(workitemNumber, avoidLogin) {
     return new Promise(function(resolve, reject) {
         self.req.get(self.repo + "/oslc/workitems/" + workitemNumber + ".json",
             function (err, resp, body) {
+                console.log(err);
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
                 if (resp.statusCode == 401) {
                     // login and retry
                     if (avoidLogin) {
